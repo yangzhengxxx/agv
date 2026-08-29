@@ -1,0 +1,14 @@
+<launch>
+  <arg name="points_topic" default="/livox/lidar"/>
+  <arg name="map_path" default="$(find ndt_mapping)/maps/map0226.pcd"/>
+
+  <node pkg="ndt_mapping" type="map_loader_node" name="map_loader" output="screen">
+    <param name="map_path" value="$(arg map_path)"/>
+  </node>
+
+  <node pkg="ndt_mapping" type="voxel_filter_node" name="voxel_filter" output="screen">
+    <remap from="/livox/lidar" to="$(arg points_topic)"/>
+  </node>
+
+  <node pkg="ndt_mapping" type="ndt_matching_node" name="ndt_matching" output="screen"/>
+</launch>

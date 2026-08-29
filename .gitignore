@@ -1,0 +1,38 @@
+# ROS/catkin generated files
+**/build/
+**/devel/
+**/install/
+**/logs/
+*.bag
+*.pcd.tmp
+
+# Keil generated files and user state
+stm32f4/Listing/
+stm32f4/Output/
+*.uvguix.*
+*.uvoptx
+*.bin
+*.hex
+*.axf
+*.map
+*.o
+*.d
+*.crf
+*.lst
+*.dep
+*.lnp
+*.sct
+JLinkSettings.ini
+DebugConfig/
+
+# Editors and temporary files
+.vscode/
+*.swp
+*.swo
+*~
+.audit-build/
+.cleanup-trash/
+*.onetoc2
+*.log
+.env
+.env.*

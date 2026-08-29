@@ -1,0 +1,31 @@
+<launch>
+  <!-- Radar drivers are intentionally external to this repository. -->
+  <arg name="points_topic" default="/livox/lidar"/>
+  <arg name="scan_front_topic" default="/scan1"/>
+  <arg name="scan_rear_topic" default="/scan2"/>
+  <arg name="controller_port" default="/dev/ttyS7"/>
+  <arg name="can_interface" default="can1"/>
+  <arg name="api_base_url" default="$(optenv AGV_API_BASE_URL)"/>
+  <arg name="api_username" default="$(optenv AGV_API_USERNAME)"/>
+  <arg name="api_password" default="$(optenv AGV_API_PASSWORD)"/>
+
+  <include file="$(find ndt_mapping)/launch/localization.launch">
+    <arg name="points_topic" value="$(arg points_topic)"/>
+  </include>
+
+  <node pkg="dispatch_pkg" type="dispatch_node" name="http_agv_client" output="screen">
+    <param name="api_base_url" value="$(arg api_base_url)"/>
+    <param name="api_username" value="$(arg api_username)"/>
+    <param name="api_password" value="$(arg api_password)"/>
+  </node>
+
+  <node pkg="agv_bridge" type="agv_bridge_node" name="agv_bridge" output="screen">
+    <param name="serial_port" value="$(arg controller_port)"/>
+    <remap from="/scan1" to="$(arg scan_front_topic)"/>
+    <remap from="/scan2" to="$(arg scan_rear_topic)"/>
+  </node>
+
+  <node pkg="can_pkg" type="can_node" name="obstacle_can_bridge" output="screen">
+    <param name="can_interface" value="$(arg can_interface)"/>
+  </node>
+</launch>

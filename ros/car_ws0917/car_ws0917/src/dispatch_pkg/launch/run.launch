@@ -1,0 +1,11 @@
+<launch>
+  <arg name="api_base_url" default="$(optenv AGV_API_BASE_URL)"/>
+  <arg name="api_username" default="$(optenv AGV_API_USERNAME)"/>
+  <arg name="api_password" default="$(optenv AGV_API_PASSWORD)"/>
+
+  <node pkg="dispatch_pkg" type="dispatch_node" name="http_agv_client" output="screen">
+    <param name="api_base_url" value="$(arg api_base_url)"/>
+    <param name="api_username" value="$(arg api_username)"/>
+    <param name="api_password" value="$(arg api_password)"/>
+  </node>
+</launch>

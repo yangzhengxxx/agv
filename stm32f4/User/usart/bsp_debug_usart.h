@@ -1,0 +1,53 @@
+#ifndef __DEBUG_USART_H
+#define __DEBUG_USART_H
+
+#include "stm32f4xx.h"
+#include <stdio.h>
+#include <string.h>
+
+#define DEBUG_UART5 UART5
+#define DEBUG_UART5_CLK RCC_APB1Periph_UART5
+#define DEBUG_UART_RX5_GPIO_PORT GPIOD
+#define DEBUG_UART_RX5_GPIO_CLK RCC_AHB1Periph_GPIOD
+#define DEBUG_UART_RX5_PIN GPIO_Pin_2
+#define DEBUG_UART_RX5_AF GPIO_AF_UART5
+#define DEBUG_UART_RX5_SOURCE GPIO_PinSource2
+#define DEBUG_UART_TX5_GPIO_PORT GPIOC
+#define DEBUG_UART_TX5_GPIO_CLK RCC_AHB1Periph_GPIOC
+#define DEBUG_UART_TX5_PIN GPIO_Pin_12
+#define DEBUG_UART_TX5_AF GPIO_AF_UART5
+#define DEBUG_UART_TX5_SOURCE GPIO_PinSource12
+#define DEBUG_UART5_IRQHandler UART5_IRQHandler
+#define DEBUG_UART5_IRQ UART5_IRQn
+
+#define DEBUG_USART1 USART1
+#define DEBUG_USART1_CLK RCC_APB2Periph_USART1
+#define DEBUG_USART_RX1_GPIO_PORT GPIOA
+#define DEBUG_USART_RX1_GPIO_CLK RCC_AHB1Periph_GPIOA
+#define DEBUG_USART_RX1_PIN GPIO_Pin_10
+#define DEBUG_USART_RX1_AF GPIO_AF_USART1
+#define DEBUG_USART_RX1_SOURCE GPIO_PinSource10
+#define DEBUG_USART_TX1_GPIO_PORT GPIOA
+#define DEBUG_USART_TX1_GPIO_CLK RCC_AHB1Periph_GPIOA
+#define DEBUG_USART_TX1_PIN GPIO_Pin_9
+#define DEBUG_USART_TX1_AF GPIO_AF_USART1
+#define DEBUG_USART_TX1_SOURCE GPIO_PinSource9
+#define DEBUG_USART1_IRQ USART1_IRQn
+
+#define USART1_MAX_RECV_LEN 400
+#define USART1_MAX_SEND_LEN 400
+#define USART1_RX_EN 1
+
+extern u16 USART5_RX_STA;
+extern u8 USART5_RX_END;
+extern u8 test_USART5_RX_END;
+extern u8 AtRxBuffer[400];
+extern uint16_t Rxcouter;
+extern u8 recv_4g_flag;
+extern u16 USART1_RX_STA;
+
+void Debug_UART5_Config(void);
+void Debug_USART1_Config(void);
+void UART5_SendArray(u8 *array, u8 length);
+
+#endif
